@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - FluTech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .login-page {
+            background: linear-gradient(160deg, #060e18, #0a1628, #0d2137);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 40px 35px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header .logo-icon {
+            font-size: 50px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .login-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .login-header h1 span {
+            color: var(--gold);
+        }
+        .login-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        .login-form .form-group {
+            margin-bottom: 18px;
+        }
+        .login-form label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--gray);
+        }
+        .login-form label i {
+            color: var(--gold);
+            margin-left: 8px;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--white);
+            transition: var(--transition);
+        }
+        .login-form input:focus {
+            border-color: var(--gold);
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .login-form input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 18px 0 25px;
+            font-size: 14px;
+        }
+        .form-options label {
+            color: var(--gray);
+            cursor: pointer;
+        }
+        .form-options input[type="checkbox"] {
+            accent-color: var(--gold);
+            margin-left: 6px;
+        }
+        .form-options a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+        .login-btn i {
+            margin-left: 10px;
+        }
+        .login-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.2);
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--gray);
+        }
+        .login-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .demo-creds {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 2;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .demo-creds strong {
+            color: var(--white);
+        }
+        .demo-creds span {
+            color: var(--gold);
+        }
+        .alert {
+            margin-top: 15px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            font-weight: 600;
+        }
+        .alert.success {
+            display: block;
+            background: rgba(76, 175, 80, 0.1);
+            color: #81c784;
+            border: 1px solid rgba(76, 175, 80, 0.12);
+        }
+        .alert.error {
+            display: block;
+            background: rgba(239, 83, 80, 0.1);
+            color: #ef9a9a;
+            border: 1px solid rgba(239, 83, 80, 0.12);
+        }
+        .alert i {
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body class="login-page">
+
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <div class="logo-icon"><i class="fas fa-oil-can"></i></div>
+            <h1>Flu<span>Tech</span></h1>
+            <p>تسجيل الدخول إلى لوحة التحكم</p>
+        </div>
+
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                <input type="email" id="email" placeholder="admin@flutech.com">
+            </div>
+            <div class="form-group">
+                <label for="password"><i class="fas fa-lock"></i> كلمة المرور</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+
+            <div class="form-options">
+                <label><input type="checkbox"> تذكرني</label>
+                <a href="#">نسيت كلمة المرور؟</a>
+            </div>
+
+            <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+
+            <div class="login-footer">
+                <p>ليس لديك حساب؟ <a href="#">سجل الآن</a></p>
+                <div class="demo-creds">
+                    <strong>📋 للاختبار:</strong>
+                    <span>admin@flutech.com</span> | <span>123456</span>
+                </div>
+            </div>
+        </form>
+
+        <div id="loginMessage" class="alert"></div>
+    </div>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const msg = document.getElementById('loginMessage');
+
+    if (!email || !password) {
+        msg.className = 'alert error';
+        msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> الرجاء تعبئة جميع الحقول';
+        return;
+    }
+
+    if (email === 'admin@flutech.com' && password === '123456') {
+        msg.className = 'alert success';
+        msg.innerHTML = '<i class="fas fa-check-circle"></i> تم تسجيل الدخول بنجاح!';
+        localStorage.setItem('user', JSON.stringify({ email: email, name: 'مدير النظام' }));
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+    } else {
+        msg.className = 'alert error';
+        msg.innerHTML = '<i class="fas fa-times-circle"></i> البريد أو كلمة المرور غير صحيحة';
+    }
+});
+</script>
+
+</body>
+</html>
