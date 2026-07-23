@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluTech - نقل المواد البترولية</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ====== شريط التنقل ====== -->
+<nav class="navbar">
+    <a href="dashboard.html" class="logo">
+        <img src="image.png.png" alt="FLUTE" style="height: 40px; width: auto; border-radius: 4px;">
+        <span>Flu<span>Tech</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <!-- سيتم تعبئتها بواسطة JavaScript -->
+    </ul>
+</nav>
+
+<!-- ====== الهيدر ====== -->
+<section class="header">
+    <div class="header-content">
+        <span class="badge"><i class="fas fa-star"></i> شركة رائدة في السودان</span>
+        <h1>Flu<span>Tech</span></h1>
+        <p>نقل المواد البترولية بأمان واحترافية</p>
+        <div class="header-buttons">
+            <a href="about.html" class="btn-primary"><i class="fas fa-info-circle"></i> تعرف علينا</a>
+            <a href="contact.html" class="btn-secondary"><i class="fas fa-phone-alt"></i> تواصل معنا</a>
+        </div>
+    </div>
+</section>
+
+<!-- ====== الخدمات ====== -->
+<section class="container">
+    <div class="section-header">
+        <h2><i class="fas fa-cogs"></i> خدماتنا</h2>
+        <p>نقدم حلولاً متكاملة في نقل وتوزيع المواد البترولية</p>
+    </div>
+    
+    <div class="cards">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-truck"></i></div>
+            <h3>نقل الوقود</h3>
+            <p>نقل البنزين والديزل والغاز بأحدث الصهاريج المعتمدة</p>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-satellite-dish"></i></div>
+            <h3>تتبع لحظي</h3>
+            <p>نظام GPS متطور لتتبع الشحنات لحظة بلحظة</p>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>تأمين شامل</h3>
+            <p>جميع الشحنات مؤمنة بالكامل ضد المخاطر</p>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+            <h3>تقارير دقيقة</h3>
+            <p>تقارير تحليلية عن أداء النقل واستهلاك الوقود</p>
+        </div>
+    </div>
+</section>
+
+<!-- ====== الفوتر ====== -->
+<footer class="footer">
+    <p>© 2026 شركة <span>FluTech</span>. جميع الحقوق محفوظة</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem('logged_in');
+    
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        window.location.href = 'index.html';
+        return;
+    }
+    
+    const navLinks = document.getElementById('navLinks');
+    const pages = [
+        { name: 'لوحة التحكم', icon: 'fa-chart-pie', link: 'dashboard.html' },
+        { name: 'الرئيسية', icon: 'fa-home', link: 'index2.html', active: true },
+        { name: 'من نحن', icon: 'fa-users', link: 'about.html' },
+        { name: 'مشاريعنا', icon: 'fa-briefcase', link: 'projects.html' },
+        { name: 'الأسعار', icon: 'fa-chart-bar', link: 'prices.html' },
+        { name: 'اتصل بنا', icon: 'fa-headset', link: 'contact.html' }
+    ];
+    
+    let html = '';
+    pages.forEach(page => {
+        const activeClass = page.active ? 'active' : '';
+        html += `<li><a href="${page.link}" class="${activeClass}"><i class="fas ${page.icon}"></i> ${page.name}</a></li>`;
+    });
+    
+    html += `<li><a href="#" onclick="logout()" class="btn-login" style="background: #dc3545 !important;"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>`;
+    
+    navLinks.innerHTML = html;
+});
+
+function logout() {
+    if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+        localStorage.removeItem('logged_in');
+        localStorage.removeItem('user_name');
+        window.location.href = 'index.html';
+    }
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

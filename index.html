@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - FluTech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .login-page {
+            background: linear-gradient(160deg, #060e18, #0a1628, #0d2137);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 50px 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .login-box .logo-img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .login-box h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        .login-box h1 span {
+            color: var(--gold);
+        }
+        .login-box .subtitle {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .login-box .country {
+            color: var(--gold);
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .login-box p {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .login-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.3);
+        }
+        .login-btn i {
+            font-size: 22px;
+        }
+        .demo-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--gray);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .demo-note span {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body class="login-page">
+
+<div class="login-container">
+    <div class="login-box">
+        <!-- ====== الشعار ====== -->
+        <img src="image.png.png" alt="FLUTE" class="logo-img">
+        <h1>Flu<span>Tech</span></h1>
+        <div class="subtitle">PETROLEUM TRANSPORT &amp; LOGISTICS</div>
+        <span class="country">🇸🇩 الجمهورية السودانية</span>
+        <p>نقل المواد البترولية بأمان واحترافية</p>
+
+        <button onclick="login()" class="login-btn">
+            <i class="fas fa-sign-in-alt"></i> دخول إلى لوحة التحكم
+        </button>
+
+        <div class="demo-note">
+            <i class="fas fa-info-circle" style="color: var(--gold); margin-left: 8px;"></i>
+            اضغط على الزر للدخول فوراً <span>بدون إيميل أو كلمة مرور</span>
+        </div>
+    </div>
+</div>
+
+<script>
+function login() {
+    localStorage.setItem('logged_in', 'true');
+    localStorage.setItem('user_name', 'مدير النظام');
+    window.location.href = 'dashboard.html';
+}
+</script>
+
+</body>
+</html>

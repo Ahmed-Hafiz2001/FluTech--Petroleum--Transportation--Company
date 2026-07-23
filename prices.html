@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسعار - FluTech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="dashboard.html" class="logo">
+        <img src="image.png.png" alt="FLUTE" style="height: 40px; width: auto; border-radius: 4px;">
+        <span>Flu<span>Tech</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <!-- سيتم تعبئتها بواسطة JavaScript -->
+    </ul>
+</nav>
+
+<section class="header">
+    <div class="header-content">
+        <span class="badge"><i class="fas fa-chart-line"></i> متابعة لحظية</span>
+        <h1>أسعار <span>الوقود</span></h1>
+        <p>متابعة أحدث أسعار النفط والغاز عالمياً</p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="section-header">
+        <h2><i class="fas fa-dollar-sign"></i> سعر برميل النفط اليوم</h2>
+        <p>الأسعار محدثة بشكل دوري</p>
+    </div>
+
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="padding: 15px 20px; text-align: center; background: rgba(201,168,76,0.08); border-bottom: 2px solid rgba(201,168,76,0.15); color: var(--gold); font-size: 14px;"><i class="fas fa-gas-pump"></i> نوع الوقود</th>
+                    <th style="padding: 15px 20px; text-align: center; background: rgba(201,168,76,0.08); border-bottom: 2px solid rgba(201,168,76,0.15); color: var(--gold); font-size: 14px;"><i class="fas fa-dollar-sign"></i> السعر</th>
+                    <th style="padding: 15px 20px; text-align: center; background: rgba(201,168,76,0.08); border-bottom: 2px solid rgba(201,168,76,0.15); color: var(--gold); font-size: 14px;"><i class="fas fa-arrows-alt-h"></i> التغيير</th>
+                </tr>
+            </thead>
+            <tbody id="priceTableBody">
+                <!-- يتم تعبئتها بواسطة JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;">
+        <p id="updateTime" style="color: var(--gray); font-size: 14px;"><i class="fas fa-clock"></i> جاري التحميل...</p>
+        <button onclick="updatePrices()" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.15); color: var(--gold); padding: 6px 20px; border-radius: 8px; cursor: pointer; font-family: inherit; transition: var(--transition);">
+            <i class="fas fa-sync-alt"></i> تحديث
+        </button>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2026 شركة <span>FluTech</span>. جميع الحقوق محفوظة</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem('logged_in');
+    
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        window.location.href = 'index.html';
+        return;
+    }
+    
+    const navLinks = document.getElementById('navLinks');
+    const pages = [
+        { name: 'لوحة التحكم', icon: 'fa-chart-pie', link: 'dashboard.html' },
+        { name: 'الرئيسية', icon: 'fa-home', link: 'index2.html' },
+        { name: 'من نحن', icon: 'fa-users', link: 'about.html' },
+        { name: 'مشاريعنا', icon: 'fa-briefcase', link: 'projects.html' },
+        { name: 'الأسعار', icon: 'fa-chart-bar', link: 'prices.html', active: true },
+        { name: 'اتصل بنا', icon: 'fa-headset', link: 'contact.html' }
+    ];
+    
+    let html = '';
+    pages.forEach(page => {
+        const activeClass = page.active ? 'active' : '';
+        html += `<li><a href="${page.link}" class="${activeClass}"><i class="fas ${page.icon}"></i> ${page.name}</a></li>`;
+    });
+    
+    html += `<li><a href="#" onclick="logout()" class="btn-login" style="background: #dc3545 !important;"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>`;
+    
+    navLinks.innerHTML = html;
+});
+
+function logout() {
+    if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+        localStorage.removeItem('logged_in');
+        localStorage.removeItem('user_name');
+        window.location.href = 'index.html';
+    }
+}
+
+const fuelData = [
+    { name: 'خام برنت Brent', price: 82.45, change: 1.23 },
+    { name: 'خام غرب تكساس WTI', price: 78.90, change: -0.55 },
+    { name: 'البنزين 95', price: 3.89, change: 0.10 },
+    { name: 'الديزل', price: 4.15, change: -0.08 },
+    { name: 'غاز طبيعي', price: 2.75, change: 0.05 }
+];
+
+function loadPrices() {
+    const tbody = document.getElementById('priceTableBody');
+    tbody.innerHTML = '';
+    
+    fuelData.forEach(item => {
+        const row = document.createElement('tr');
+        const arrow = item.change > 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+        const color = item.change > 0 ? '#4caf50' : '#ef5350';
+        row.innerHTML = `
+            <td style="padding: 14px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--white);">${item.name}</td>
+            <td style="padding: 14px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--white); font-weight: 700;">$${item.price.toFixed(2)}</td>
+            <td style="padding: 14px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600; color: ${color};">
+                <i class="fas ${arrow}"></i> ${Math.abs(item.change).toFixed(2)}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    const now = new Date();
+    document.getElementById('updateTime').innerHTML = `<i class="fas fa-clock"></i> آخر تحديث: ${now.toLocaleString('ar-EG')}`;
+}
+
+function updatePrices() {
+    const btn = document.querySelector('button');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحديث...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        fuelData.forEach(item => {
+            const change = (Math.random() * 2 - 1).toFixed(2);
+            item.price = Math.max(2, item.price + parseFloat(change));
+            item.change = parseFloat(change);
+        });
+        loadPrices();
+        btn.innerHTML = '<i class="fas fa-sync-alt"></i> تحديث';
+        btn.disabled = false;
+    }, 1500);
+}
+
+loadPrices();
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
